@@ -90,4 +90,141 @@ function card(){const el=$("card");
  else if(view){const st=SN[view],n=CT.filter(c=>c[1]===view).length;el.innerHTML=`<h2>${st[1]}</h2><div class="sub">${n} destinations on YatraDham.Org</div><a class="go alt" href="${st[8]}" target="_blank" rel="noopener">Browse ${st[1]} on YatraDham.Org ↗</a><p class="note">Pick a city from the list or map.</p>`}
  else el.innerHTML=`<h3>How to use</h3><p>Click a city or a shaded state. The map zooms into the state and shows the YatraDham.Org page button for that city.</p>`}
 apply();
-</script></body></html>
+</script><script>/*YATRADHAM LOCATION FIX*/
+(function(){
+if(typeof CT==="undefined"||typeof sp==="undefined"){return}
+// Real latitude/longitude of places that had a guessed position. Map = 171.3+18.6*(lon-77.21), 177.8+20*(28.61-lat)
+const D="Abu Road|24.48|72.78;Achalgarh|24.60|72.77;Aligarh|27.88|78.08;Almatti|16.33|75.89;Aluva|10.11|76.35;Alwar|27.57|76.61;Alwarthirunagari|8.60|77.94;Ambajogai|18.73|76.38;Ananthagiri|17.33|77.90;Angul|20.84|85.10;Anupgarh|29.19|73.21;Aonla|28.28|79.17;Aswaraopeta|17.25|80.72;Atpadi|17.40|74.97;Audumbar (Sangli)|16.95|74.52;Aundha Nagnath|19.53|77.04;Ausa|18.25|76.50;Bagalkot (Bagalkote)|16.18|75.70;Bageshwar|29.84|79.77;Bahadurgarh|28.69|76.93;Baleswar|21.50|86.93;Balicha (Udaipur)|24.62|73.68;Balrampur|27.43|82.18;Balsana|21.10|74.00;Bankura|23.23|87.07;Baramati|18.15|74.58;Baranti|23.45|86.75;Bareilly|28.35|79.43;Bargarh|21.33|83.62;Barkot|30.81|78.21;Barkul|19.73|85.35;Barmer|25.75|71.40;Basukund (Vaishali)|25.73|85.19;Bethuadahari|23.62|88.57;Bhachau (Kutch)|23.29|70.34;Bharatpur|27.22|77.49;Bharmour|32.44|76.53;Bhilai (Durg)|21.21|81.38;Bhitarakanika|20.72|86.87;Bhiwani|28.79|76.13;Bhowali (Near Kainchi Dham)|29.40|79.51;Bhuntar|31.88|77.15;Bhuvanagiri|17.51|78.89;Bina|24.19|78.20;Botad|22.17|71.67;Brijghat|28.78|78.18;Chadayamangalam|8.88|76.87;Chakrata|30.70|77.87;Chamoli|30.40|79.32;Chamorshi (Gadchiroli)|19.93|79.91;Champaran|21.18|81.89;Chandaneswar (Talsari)|21.53|87.15;Chandbali|20.78|86.73;Chandipur|21.45|87.03;Chandod|21.98|73.42;Chandrapuri|30.43|79.06;Chhapaiya|26.94|82.06;Chitrakoot|25.20|80.87;Chottanikkara|9.94|76.39;Chunar|25.13|82.90;Dabhoi|22.13|73.43;Damoh|23.84|79.44;Datia|25.67|78.46;Deogad (Murme)|16.38|73.37;Devgad (Sindhudurg)|16.38|73.38;Devprayag|30.15|78.60;Dhanaulti (Dhanolti)|30.42|78.25;Dharmapuri|12.13|78.16;Dharoi|23.98|72.85;Dindi|16.57|81.77;Dirang|27.36|92.24;Dongargarh|21.19|80.76;Draksharamam|16.79|82.06;Dwaraka Tirumala (Near Vijayawada)|17.00|81.30;Eluru|16.71|81.10;Erode|11.34|77.72;Falna|25.23|73.24;Farakka|24.82|87.90;Fardapur|20.55|75.93;Fatehabad|29.51|75.45;Fatehpur|27.99|74.96;Fatehpur Sikri|27.09|77.67;Gadwal|16.23|77.80;Gandikota|14.81|78.28;Ganeshpuri|19.50|73.05;Gangavathi|15.43|76.53;Garhmukteshwar|28.78|78.10;Garli|31.82|76.00;Ghangaria|30.70|79.60;Ghatampur|26.15|80.17;Godda|24.83|87.21;Gogamedi|29.17|74.43;Gokul (Mathura)|27.43|77.72;Gopeshwar|30.41|79.32;Govindghat|30.62|79.57;Guhagar (Ratnagiri)|17.48|73.19;Gumla|23.04|84.54;Guntakal|15.17|77.38;Habibpur|25.08|88.15;Hadsar|32.40|76.60;Haldwani|29.22|79.51;Hamirpur|31.69|76.52;Hanuman Chatti|30.90|78.40;Hanumangarh|29.58|74.32;Harihar|14.51|75.80;Harihareshwar|17.99|73.02;Hastinapur|29.17|78.02;Hospet (Hosapete)|15.27|76.39;Humcha|13.71|75.20;Idukki|9.85|76.97;Igatpuri|19.70|73.56;Isri (Near Giridih)|23.95|86.15;Jageshwar Dham|29.64|79.85;Jajpur|20.85|86.34;Jakhau (Kutch)|23.22|68.72;Jalna|19.84|75.88;Jalpaiguri|26.52|88.73;Jangaon|17.72|79.15;Jangareddygudem|17.12|81.30;Janki Chatti|30.98|78.42;Jath|17.05|75.22;Jatipura|27.50|77.47;Jaunpur|25.73|82.68;Jhunjhunu|28.13|75.40;Junnar|19.21|73.88;Jwalamukhi|31.88|76.32;Kadiri|14.11|78.16;Kakdwip|21.88|88.19;Kalady (Ernakulam)|10.17|76.44;Kalimath|30.52|79.08;Kalna|23.22|88.37;Kanatal|30.41|78.33;Kaneri|16.67|74.17;Karanja|20.48|77.48;Karjan (Vadodara)|22.05|73.12;Karla (Pune)|18.78|73.47;Kaudiyala|30.07|78.50;Kavi (Bharuch)|22.17|72.72;Kayavarohan (Vadodara)|22.05|73.40;Kaza|32.23|78.07;Kelwa|19.65|72.73;Keonjhar|21.63|85.58;Kesariyaji Tirth|24.03|73.72;Kevadia|21.83|73.72;Khajjiar|32.55|76.06;Khopoli|18.79|73.34;Khuldabad|20.00|75.19;Kolanupaka|17.60|79.02;Koliyak (Bhavnagar)|21.60|72.28;Koppa|13.54|75.36;Kumarakom|9.62|76.43;Kumhari (Durg)|21.23|81.60;Kundalpur|25.04|85.45;Kunigal (Tumakuru)|13.02|77.02;Lambasingi|17.83|82.46;Lenyadri|19.24|73.85;Limbdi|22.57|71.80;Lonar|19.98|76.51;Mahemdavad|22.82|72.76;Mahendragarh (Narnaul)|28.27|76.15;Mahuva|21.08|71.77;Maithon|23.78|86.82;Malampuzha|10.83|76.68;Malkapur|20.89|76.20;Malpura (Tonk)|26.28|75.37;Malvan (Sindhudurg)|16.05|73.46;Mangalagiri|16.43|80.57;Mangi Tungi (Nashik)|20.75|74.00;Manikaran|32.03|77.35;Manjeshwar|12.72|74.89;Manmad|20.25|74.44;Margao (Goa)|15.27|73.96;Markapur|15.74|79.27;Mashobra|31.12|77.22;Masinagudi|11.57|76.65;Mirzapur|25.15|82.57;Mughalsarai|25.28|83.12;Mukteshwar|29.47|79.65;Munsiyari|30.07|80.24;Muzhappilangad|11.80|75.45;Mypadu|14.45|80.18;Nadia|23.40|88.50;Nagamangala|12.82|76.75;Nagaur|27.20|73.73;Naina Devi|31.30|76.54;Nakhatrana|23.35|69.25;Nalasopara|19.42|72.82;Nalgonda (Near Cheruvugattu)|17.05|79.27;Nandurbar|21.37|74.24;Naraingarh|30.48|77.13;Nareli (Ajmer)|26.43|74.70;Narsinhwadi - (Kolhapur)|16.71|74.60;Naugachhia|25.40|87.10;Naugarh|27.17|83.10;Naya Raipur (Atal Nagar-Nava Raipur)|21.17|81.78;Neemuch|24.47|74.87;New Tehri|30.38|78.43;Nilamel|8.95|76.85;Ojhar (Nashik)|20.12|73.93;Orvakallu|15.69|78.35;Ozar(Pune)|19.17|73.97;Paithan|19.48|75.38;Palakkad|10.77|76.65;Pali|25.77|73.33;Pali (Maharashtra)|18.55|73.22;Pandukeshwar|30.64|79.55;Paonta Sahib|30.43|77.62;Parassinikadavu|11.97|75.40;Patan|23.85|72.12;Patdi|23.20|71.80;Pawapuri|25.08|85.52;Pedamiram (Bhimavaram)|16.53|81.55;Penugonda|16.65|81.73;Pichavaram|11.43|79.78;Pilani|28.37|75.60;Pipalkoti|30.43|79.43;Ponmudi|8.76|77.11;Radha Kund (Mathura)|27.52|77.47;Rajapur (Near Dhopeshwar Temple)|16.65|73.52;Rajula|21.04|71.44;Ramachandrapuram|16.82|82.02;Ramakkalmedu|9.75|77.18;Rambha|19.52|85.08;Ramtek|21.40|79.33;Ranaghat|23.17|88.57;Ranipet|12.93|79.33;Ranjangaon|18.77|74.20;Rann Utsav Kutch|23.85|69.67;Ratanpur|22.30|82.17;Rishikesh Swargashram Trust|30.14|78.32;Rosemala|8.95|77.15;Sadri|25.18|73.45;Sanchi|23.48|77.74;Saoner (Nagpur)|21.38|78.92;Sarahan|31.52|77.80;Sari (Near Deoria Tal)|30.50|79.10;Satara|17.68|74.00;Sawai Madhopur|26.00|76.35;Sehore|23.20|77.08;Shahjahanpur|27.88|79.90;Sheoganj|25.15|73.07;Shirpur|21.35|74.88;Shiv Khori|33.07|74.87;Shravasti|27.52|82.00;Sikar|27.62|75.14;Sirohi|24.88|72.86;Sirsa|29.53|75.03;Sirsi|14.62|74.85;Siwani (Bhiwani)|28.97|75.77;Solapur|17.66|75.91;Someshwar|29.70|79.52;Sonepur|25.72|85.18;Songadh|21.17|73.57;Sri Ganganagar|29.90|73.88;Srikakulam|18.30|83.90;Srinagar|30.22|78.78;Srinagar J&K|34.08|74.80;Statue of Unity Hotels|21.84|73.72;Suchindram|8.15|77.47;Sumerpur|25.15|73.07;Suratgarh (Sri Ganganagar)|29.32|73.90;Surendranagar|22.73|71.65;Suryalanka|15.88|80.45;Talegaon|18.73|73.68;Tarakeshwar|22.88|88.02;Thane|19.20|72.97;Thanneermukkom|9.70|76.38;Thirukadaiyur|11.07|79.80;Thirunallar|10.92|79.77;Tiruchanur (Tirupati)|13.60|79.45;Tithal - Valsad|20.58|72.90;Titwala (Thane)|19.30|73.20;Tohana|29.70|75.90;Upleta|21.74|70.28;Vagamon|9.68|76.90;Vaikom|9.75|76.40;Vajreshwari|19.50|73.00;Vasad (Anand)|22.47|73.07;Veraval near Somnath|20.91|70.37;Vidisha|23.52|77.81;Vijapur|23.57|72.75;Vijayapuri South (Nagarjunasagar)|16.55|79.30;Viratnagar|27.45|76.18;Vontimitta|14.40|79.00;Wadi Ratnagiri (Kolhapur)|16.80|74.17;Wardha|20.75|78.60;Wayanad|11.70|76.10;Yaganti|15.33|78.17;Yamunanagar|30.13|77.28";
+const P=(la,lo)=>[+(171.3+18.6*(lo-77.21)).toFixed(1),+(177.8+20*(28.61-la)).toFixed(1)];
+const idx={};CT.forEach((c,i)=>{(idx[c[0]]=idx[c[0]]||[]).push(i)});
+const miss=[],moved=[];
+D.split(";").forEach(r=>{const a=r.split("|"),l=idx[a[0]];if(!l){miss.push(a[0]);return}
+ const p=P(+a[1],+a[2]);l.forEach(i=>{CT[i][2]=p[0];CT[i][3]=p[1];CT[i][4]=0})});
+// Safety check: every dot must lie inside its own state. If not, move it to the nearest inside point.
+CT.forEach(c=>{const path=sp[c[1]];if(!path||!path.isPointInFill)return;
+ const inn=(x,y)=>path.isPointInFill(new DOMPoint(x,y));
+ if(inn(c[2],c[3]))return;
+ const s=SN[c[1]],cx=(s[3]+s[5])/2,cy=(s[4]+s[6])/2;let ok=false;
+ for(let t=.02;t<=1.001;t+=.02){const x=c[2]+(cx-c[2])*t,y=c[3]+(cy-c[3])*t;
+  if(inn(x,y)){moved.push(c[0]+": "+c[2]+","+c[3]+" -> "+x.toFixed(1)+","+y.toFixed(1));c[2]=+x.toFixed(1);c[3]=+y.toFixed(1);ok=true;break}}
+ if(!ok)moved.push(c[0]+": could not be placed")});
+CT.forEach((c,i)=>{const e=dots[i];e.classList.toggle("ap",!!c[4]);const t=e.querySelector("title");
+ if(t)t.textContent=c[0]+", "+SN[c[1]][1]+(c[4]?" (approx. position)":"")});
+if(miss.length)console.warn("Location fix: names not found",miss);
+if(moved.length)console.info("Location fix: moved inside state",moved);
+apply();
+})();
+</script>
+<script>/*YATRADHAM CROSS-SELL ADDON*/
+(function(){
+if(typeof CT==="undefined"){document.body.innerHTML="<p style=\"font:18px system-ui;padding:24px\">This is an add-on, not a page. Paste it into your pilgrimage map file before &lt;/body&gt;, or load it with a script tag after your map script.</p>";return}
+const KM=5.5; // 1 map unit is about 5.5 km (straight line)
+// Cross-sell circuits: names must match the city names in CT exactly
+const CIRC=[
+["Saurashtra Circuit",["Somnath","Dwarka","Junagadh","Sasan Gir","Porbandar","Bet Dwarka","Rajkot"]],
+["North Gujarat Circuit",["Ambaji","Mount Abu","Palanpur","Siddhpur","Becharaji","Mehsana","Vadnagar"]],
+["Vadodara Circuit",["Vadodara","Pavagadh","Dakor","Kevadia","Surat"]],
+["Char Dham Circuit",["Haridwar","Rishikesh","Kedarnath","Badrinath","Gaurikund","Joshimath","Uttarkashi","Gangotri","Harsil"]],
+["Braj Circuit",["Mathura","Vrindavan / Mathura","Govardhan","Barsana","Gokul (Mathura)","Agra"]],
+["Kashi Circuit",["Varanasi","Prayagraj","Ayodhya","Bodh Gaya","Vindhyachal","Gorakhpur","Kushinagar"]],
+["Tirupati Circuit",["Tirupati","Tiruchanur (Tirupati)","Srikalahasti","Kanipakam","Kanchipuram","Tiruvannamalai","Chennai"]],
+["Tamil Nadu South Circuit",["Rameshwaram","Madurai","Kanyakumari","Thanjavur","Srirangam","Palani","Kodaikanal"]],
+["Shirdi Circuit",["Shirdi","Shani Shingnapur","Nashik","Trimbakeshwar (Nashik)","Aurangabad"]],
+["Maharashtra West Circuit",["Pandharpur","Kolhapur","Mahabaleshwar","Panchgani","Pune","Jejuri"]],
+["Mahakal Circuit",["Ujjain","Omkareshwar","Indore","Maheshwar","Mandsaur"]],
+["Odisha Circuit",["Jagannath Puri","Konark","Bhubaneswar","Cuttack"]],
+["Mewar Circuit",["Udaipur","Nathdwara","Eklingji","Kumbhalgarh","Mount Abu"]],
+["Jaipur Circuit",["Jaipur","Pushkar","Ajmer","Kaila Devi","Mehandipur"]],
+["Vaishno Devi Circuit",["Katra","Jammu","Amritsar","Jalandhar","Dharamshala"]],
+["Himachal Circuit",["Manali","Kullu","Shimla","Kangra","Dalhousie","Dharamshala"]],
+["Bengal Circuit",["Kolkata","Mayapur","Nabadwip","Tarapith","Gangasagar","Digha"]],
+["Baidyanath Circuit",["Deoghar","Basukinath","Shikharji","Ranchi"]],
+["Karnataka Coast Circuit",["Udupi","Dharmasthala","Murudeshwar","Gokarna","Sringeri"]],
+["Kerala Circuit",["Guruvayur","Kochi (Cochin / Ernakulam)","Thekkady","Munnar","Alappuzha","Trivandrum"]],
+["Telangana-AP Circuit",["Srisailam","Hyderabad","Yadagirigutta","Vijayawada","Warangal"]]
+];
+const idx={};CT.forEach((c,i)=>{(idx[c[0]]=idx[c[0]]||[]).push(i)});
+let NB=[];
+
+const st=document.createElement("style");
+st.textContent=".xs{margin-top:14px;padding:12px;border-radius:14px;background:var(--bg);border:1.5px dashed var(--o1)}"+
+".xs h3{margin:0 0 6px!important;color:var(--o1)!important}.xs ul{list-style:none;padding:0!important;margin:0}"+
+".xs li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 8px;border-radius:10px;cursor:pointer}"+
+".xs li:hover{background:var(--ctx)}.xs small{color:var(--mut)}"+
+".tg{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--o1);color:#fff;white-space:nowrap}.tg.n{background:var(--mut)}"+
+".xs .pitch{font-style:italic;background:var(--card);border:1px solid var(--ln);padding:9px;border-radius:10px;margin:8px 0}"+
+".xs .ask{font-size:13px;color:var(--mut)}"+
+".xs button{border:0;border-radius:99px;padding:7px 14px;background:var(--o1);color:#fff;font-weight:700;cursor:pointer}"+
+".xs li a{color:var(--o1);font-weight:800;text-decoration:none;padding:0 4px}"+
+".d.nb{fill:#16a34a}.xl{stroke:#16a34a;stroke-width:2;stroke-dasharray:5 4;fill:none;vector-effect:non-scaling-stroke;pointer-events:none}";
+document.head.appendChild(st);
+const hp=document.querySelector("header p");if(hp)hp.textContent="Pick a city. The map shows nearby places to cross-sell on the same call.";
+
+const gX=mk("g",{});svg.insertBefore(gX,gD);
+
+function nearby(i){
+ const me=CT[i],out=[],seen=new Set([me[0]]);
+ const add=(j,why)=>{const c=CT[j];if(j===i||seen.has(c[0]))return;seen.add(c[0]);
+  out.push({i:j,why:why,km:Math.round(Math.hypot(c[2]-me[2],c[3]-me[3])*KM)})};
+ CIRC.forEach(ci=>{if(ci[1].indexOf(me[0])>-1)ci[1].forEach(n=>{if(idx[n])add(idx[n][0],ci[0])})});
+ CT.map((c,j)=>[j,Math.hypot(c[2]-me[2],c[3]-me[3])*KM]).filter(a=>a[1]<=300&&!CT[a[0]][4])
+  .sort((a,b)=>a[1]-b[1]).forEach(a=>{if(out.length<7)add(a[0],"Nearby")});
+ return out.slice(0,7);
+}
+
+function xsell(){
+ gX.innerHTML="";dots.forEach(e=>e.classList.remove("nb"));
+ const old=document.getElementById("xs");if(old)old.remove();
+ const box=document.createElement("div");box.id="xs";box.className="xs";
+ if(sel<0){
+  if(!view){box.innerHTML="<h3>Cross-sell tip</h3><p class='ask'>Customer ne ek place bataya? Us city par click karo. Neeche nearby places milenge jo saath me bech sakte ho: temple, hotel, dharamshala, ek hi trip me.</p>";$("card").appendChild(box)}
+  return;
+ }
+ const me=CT[sel];
+ NB.forEach(n=>{dots[n.i].classList.add("nb");const c=CT[n.i],l=document.createElementNS(NS,"line");
+  l.setAttribute("x1",me[2]);l.setAttribute("y1",me[3]);l.setAttribute("x2",c[2]);l.setAttribute("y2",c[3]);l.setAttribute("class","xl");gX.appendChild(l)});
+ if(!NB.length)return;
+ const names=NB.slice(0,2).map(n=>CT[n.i][0]);
+ const pitch="Aap "+me[0]+" ja rahe hain. Wahan se "+names.join(" aur ")+" bhi paas hi hai, ek hi trip me cover ho jayega. Hotel ya dharamshala bhi saath me book kar dein?";
+ let h="<h3>Cross-sell: also offer these</h3><ul>";
+ NB.forEach((n,k)=>{const c=CT[n.i],hr=Math.max(1,Math.round(n.km*1.3/50));
+  h+="<li data-i='"+n.i+"'><span><b>"+c[0]+"</b><br><small>"+SN[c[1]][1]+" · ~"+n.km+" km · ~"+hr+" hr by road</small></span>"+
+  "<span><span class='tg"+(k<3?"":" n")+"'>"+n.why+"</span><a href='"+c[5]+"' target='_blank' rel='noopener' title='Open on YatraDham.Org'>↗</a></span></li>"});
+ h+="</ul><div class='pitch'></div><p class='ask'>Pehle pucho: kitne din ka plan hai? Kitne log? Kahan se aa rahe hain?</p><button type='button'>Copy pitch line</button>";
+ box.innerHTML=h;
+ box.querySelector(".pitch").textContent="“"+pitch+"”";
+ box.querySelectorAll("li").forEach(li=>li.onclick=()=>pick(+li.dataset.i));
+ box.querySelectorAll("li a").forEach(a=>a.onclick=e=>e.stopPropagation());
+ const b=box.querySelector("button");
+ b.onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(pitch):Promise.reject()).then(()=>{b.textContent="Copied ✓"}).catch(()=>{b.textContent="Copy not allowed"});setTimeout(()=>{b.textContent="Copy pitch line"},1500)};
+ $("card").appendChild(box);
+}
+
+const _apply=apply,_go=go,_sizes=sizes;
+apply=function(){
+ NB=sel>=0?nearby(sel):[];
+ _apply();
+ NB.forEach(n=>{const k=CT[n.i][1];if(sp[k])sp[k].classList.remove("hide")});
+ xsell();
+};
+go=function(t,ms){
+ if(sel>=0&&NB.length){
+  const p=[CT[sel]].concat(NB.map(n=>CT[n.i])),xs=p.map(a=>a[2]),ys=p.map(a=>a[3]);
+  const x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys);
+  let ww=(x1-x0)+70,hh=(y1-y0)+70;
+  if(ww/hh<W/H)ww=hh*W/H;else hh=ww*H/W;
+  ww=Math.max(ww,110);hh=ww*H/W;
+  t=[(x0+x1)/2-ww/2,(y0+y1)/2-hh/2,ww,hh];
+ }
+ _go(t,ms);
+};
+sizes=function(){
+ _sizes();
+ if(sel<0)return;
+ const k=vb[2]/W;
+ NB.forEach(n=>{const e=dots[n.i];e.style.display="";e.setAttribute("r",6.5*k)});
+};
+apply();
+})();
+</script>
+</body></html>
